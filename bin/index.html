@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Popup From Flash</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<style>
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			#charts {
+				border-style: solid; 
+				border-width: 1px; 
+			}
+		</style>
+
+		<script type="text/javascript" src="scripts/swfobject-1.5.1.js"></script>
+		<script>
+		    function embed() {
+    		    var so = new SWFObject("NavigateToWindowRunner.swf", "swf", "100%", "100%", "9.0.0", "#CCCCCC", []);		
+    		    so.write("flash-content");
+    		}
+		</script>
+	</head>
+	<body bgcolor="#cccccc" onload="embed()">
+	<center>
+	    <div id="flash-content"></div>
+	</center>
+	</body>
+</html>

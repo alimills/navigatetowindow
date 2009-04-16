@@ -26,5 +26,8 @@ package patternpark.net {
                 navigateToURL(urlRequest, "_blank");
             }
         }
+        else {
+            throw new Error("[navigateToWindow requires that ExternalInterface is available. The ExternalInterface is not available in this container. ExternalInterface requires Internet Explorer ActiveX, Firefox, Mozilla 1.7.5 and greater, or other browsers that support NPRuntime.]");
+        }
     }
 }
