@@ -36,7 +36,7 @@ import flash.text.TextFieldAutoSize;
 import patternpark.net.navigateToWindow;
 
 class NavigateToWindowExample extends Sprite {
-    private var text:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>Pattern Park from SWF</font></u></a>";
+    private var text:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open popup from SWF to Pattern Park</font></u></a>";
     private var textField:TextField;
     
     public function NavigateToWindowExample() {
