@@ -10,4 +10,4 @@ One of the unique and interesting features of this implementation is that the de
 
 For background on this project, you can check out "my":http://www.asserttrue.com/ old post "_Workaround for Safari Blocking Flash Initiated Pop Ups_":http://www.asserttrue.com/articles/2007/08/22/workaround-for-safari-blocking-flash-initiated-pop-ups.
 
-For another interesting project that solves this same problem through a JavaScript file and an ActionScript file, check out Matt Lohkampl's "popupfromflash":http://code.google.com/p/popupfromflash/ project. 
+For another interesting project that solves this same problem through a JavaScript file and an ActionScript file, check out Matt Lohkampl's "popupfromflash":http://code.google.com/p/popupfromflash/.
