@@ -2,7 +2,7 @@ h1. navigateToWindow()
 
 navigateToWindow() is a package-level ActionScript function that encapsulates all of the logic around opening a browser popup window from within Flash.
 
-The function works very similarly to "navigateToURL()":http://livedocs.adobe.com/flex/3/langref/flash/net/package.html#navigateToURL() except that you call it with the parameters that JavaScript's "window.open":https://developer.mozilla.org/En/Window.open might expect.
+The function works very similarly to "navigateToURL()":http://livedocs.adobe.com/flex/3/langref/flash/net/package.html#navigateToURL%40%41 except that you call it with the parameters that JavaScript's "window.open":https://developer.mozilla.org/En/Window.open might expect.
 
 The "test/patternpark/net/NavigateToWindowTest.as test case":http://github.com/alimills/navigatetowindow/blob/08a58132098406a72731b27e16004850da3d7c3f/test/patternpark/net/NavigateToWindowTest.as demonstrates how you might use navigateToWindow()
 
