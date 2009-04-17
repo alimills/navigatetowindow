@@ -3,9 +3,20 @@ package patternpark.net {
     import flash.net.navigateToURL;
     import flash.net.URLRequest;
     
-    public function navigateToWindow(url:String, winName:String="", toolbar:Number=1, scrollbars:Number=1, location:Number=1, statusbar:Number=0, menubar:Number=0, resizable:Number=1, width:Number=800, height:Number=700, left:Number=200, top:Number=100):void {
+    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):void {
         if(ExternalInterface.available) {
             winName = (winName == "") ? String(Math.round(9999 * Math.random()) + new Date().getTime()) : winName;
+            winFeatures ||= new Object();
+            var toolbar:Number      = (winFeatures.toolbar == null) ? 1 : winFeatures.toolbar;
+            var scrollbars:Number   = (winFeatures.scrollbars == null) ? 1 : winFeatures.scrollbars;
+            var location:Number     = (winFeatures.location == null) ? 1 : winFeatures.location;
+            var statusbar:Number    = (winFeatures.statusbar == null) ? 0 : winFeatures.statusbar;
+            var menubar:Number      = (winFeatures.menubar == null) ? 0 : winFeatures.menubar;
+            var resizable:Number    = (winFeatures.resizable == null) ? 1 : winFeatures.resizable;
+            var width:Number        = (winFeatures.width == null) ? 800 : winFeatures.width;
+            var height:Number       = (winFeatures.height == null) ? 700 : winFeatures.height;
+            var left:Number         = (winFeatures.left == null) ? 200 : winFeatures.left;
+            var top:Number          = (winFeatures.top == null) ? 100 : winFeatures.top;
             
             var js:String = (<![CDATA[
                 function(url, winName, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top) {

@@ -11,36 +11,17 @@ project_model :model do |m|
   m.background_color        = '#FFFFFF'
   m.width                   = 970
   m.height                  = 550
-  # m.src_dir               = 'src'
-  # m.lib_dir               = 'lib'
-  # m.swc_dir               = 'lib'
-  # m.bin_dir               = 'bin'
-  # m.test_dir              = 'test'
-  # m.doc_dir               = 'doc'
-  # m.asset_dir             = 'assets'
-  # m.compiler_gem_name     = 'sprout-flex4sdk-tool'
-  # m.compiler_gem_version  = '>= 4.0.0'
-  m.source_path           << "#{m.lib_dir}/asunit3"
-  # m.libraries             << :corelib
+  m.source_path            << "#{m.lib_dir}/asunit3"
 end
 
-
-desc 'Compile and debug the application'
-debug :debug
+task :html => 'bin/NavigateToWindowRunner.swf' do |t|
+  exec 'open bin/index.html'
+end
 
 desc 'Compile run the test harness'
 unit :test do |t|
-  t.input                 = "test/NavigateToWindowRunner.as"
+  t.input  = "test/NavigateToWindowRunner.as"
 end
 
-desc 'Compile the optimized deployment'
-deploy :deploy
-
-desc 'Create documentation'
-document :doc
-
-desc 'Compile a SWC file'
-swc :swc
-
 # set up the default rake task
-task :default => :debug
+task :default => :test

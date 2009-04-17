@@ -59,6 +59,6 @@ class NavigateToWindowExample extends Sprite {
     }
 
     protected function linkHandler(linkEvent:TextEvent):void {
-        navigateToWindow(linkEvent.text);
+        navigateToWindow(linkEvent.text, "newWin", {width:400, height:300});
     }
 }
