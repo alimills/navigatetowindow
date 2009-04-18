@@ -9,13 +9,13 @@ package patternpark.net {
         var toolbar:Number      = (winFeatures.toolbar == null) ? 1 : winFeatures.toolbar;
         var scrollbars:Number   = (winFeatures.scrollbars == null) ? 1 : winFeatures.scrollbars;
         var location:Number     = (winFeatures.location == null) ? 1 : winFeatures.location;
-        var statusbar:Number    = (winFeatures.statusbar == null) ? 0 : winFeatures.statusbar;
-        var menubar:Number      = (winFeatures.menubar == null) ? 0 : winFeatures.menubar;
+        var statusbar:Number    = (winFeatures.statusbar == null) ? 1 : winFeatures.statusbar;
+        var menubar:Number      = (winFeatures.menubar == null) ? 1 : winFeatures.menubar;
         var resizable:Number    = (winFeatures.resizable == null) ? 1 : winFeatures.resizable; 
-        var width:Number        = (winFeatures.width == null) ? 800 : winFeatures.width;
-        var height:Number       = (winFeatures.height == null) ? 700 : winFeatures.height;
-        var left:Number         = (winFeatures.left == null) ? 200 : winFeatures.left;
-        var top:Number          = (winFeatures.top == null) ? 100 : winFeatures.top;
+        var width:Number        = (winFeatures.width == null) ? 100 : winFeatures.width;
+        var height:Number       = (winFeatures.height == null) ? 100 : winFeatures.height;
+        var left:Number         = (winFeatures.left == null) ? 0 : winFeatures.left;
+        var top:Number          = (winFeatures.top == null) ? 0 : winFeatures.top;
         
         var js:String = (<![CDATA[
             function(url, winName, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top) {

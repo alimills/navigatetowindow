@@ -2,8 +2,6 @@ package patternpark.net {
 
     import asunit.framework.TestCase;
     
-    import patternpark.net.navigateToWindow;
-
     public class NavigateToWindowTest extends TestCase {
         private var instance:NavigateToWindowExample;
 
@@ -33,11 +31,14 @@ import flash.events.TextEvent;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 
+import patternpark.net.navigateToOverlay;
 import patternpark.net.navigateToWindow;
 
 class NavigateToWindowExample extends Sprite {
-    private var text:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open popup from SWF to Pattern Park</font></u></a>";
-    private var textField:TextField;
+    private var navWindow:TextField;
+    private var navOverlay:TextField;
+    private var navWindowText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open popup from SWF to Pattern Park</font></u></a>";
+    private var navOverlayText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open overlay from SWF to Pattern Park</font></u></a>";
     
     public function NavigateToWindowExample() {
         initialize();
@@ -45,20 +46,33 @@ class NavigateToWindowExample extends Sprite {
     }
 
     protected function initialize():void {
-        textField = new TextField();
+        navWindow = createTextField(navWindowText, windowLinkHandler);
+        navOverlay = createTextField(navOverlayText, overlayLinkHandler);
+    }
+    
+    protected function createTextField(text:String, linkHandler:Function):TextField {        
+        var textField:TextField = new TextField();
         textField.htmlText = text;
         textField.autoSize = TextFieldAutoSize.LEFT;
         textField.border = true;
         textField.background = true;
         textField.addEventListener(TextEvent.LINK, linkHandler);
+        return textField;
     }
 
     protected function createChildren():void {
-        var tf:DisplayObject = addChild(textField);
-        tf.x = tf.y = 200;
+        var window:DisplayObject = addChild(navWindow);
+        window.x = window.y = 200;
+        
+        var overlay:DisplayObject = addChild(navOverlay);
+        overlay.x = overlay.y = 300;
     }
 
-    protected function linkHandler(linkEvent:TextEvent):void {
-        navigateToWindow(linkEvent.text, "newWin", {width:400, height:300});
+    protected function windowLinkHandler(linkEvent:TextEvent):void {
+        navigateToWindow(linkEvent.text, "newWin", {width:400, height:300, top:200, left:200});
+    }
+
+    protected function overlayLinkHandler(linkEvent:TextEvent):void {
+        navigateToOverlay(linkEvent.text, {width:400, height:300, top:200, left:200});
     }
 }
