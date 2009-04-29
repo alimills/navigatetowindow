@@ -28,6 +28,7 @@ package patternpark.net {
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.TextEvent;
+import flash.geom.Point;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 
@@ -69,10 +70,24 @@ class NavigateToWindowExample extends Sprite {
     }
 
     protected function windowLinkHandler(linkEvent:TextEvent):void {
-        navigateToWindow(linkEvent.text, "newWin", {width:400, height:300, top:200, left:200});
+        var winFeatures:Object = {
+            toolbar:0,
+            scrollbars:0,
+            location:0,
+            status:0,
+            menubar:0,
+            resizable:0,
+            width:400,
+            height:300,
+            top:200,
+            left:200
+        };
+
+        navigateToWindow(linkEvent.text, "newWin", winFeatures);
     }
 
     protected function overlayLinkHandler(linkEvent:TextEvent):void {
-        navigateToOverlay(linkEvent.text, {width:400, height:300, top:200, left:200});
+        var point:Point = new Point(this.x, this.y);
+        navigateToOverlay(linkEvent.text, {width:400, height:300, top:point.x, left:point.y});
     }
 }

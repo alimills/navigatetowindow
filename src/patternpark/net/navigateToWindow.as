@@ -9,7 +9,7 @@ package patternpark.net {
         var toolbar:Number      = (winFeatures.toolbar == null) ? 1 : winFeatures.toolbar;
         var scrollbars:Number   = (winFeatures.scrollbars == null) ? 1 : winFeatures.scrollbars;
         var location:Number     = (winFeatures.location == null) ? 1 : winFeatures.location;
-        var statusbar:Number    = (winFeatures.statusbar == null) ? 1 : winFeatures.statusbar;
+        var status:Number       = (winFeatures.status == null) ? 1 : winFeatures.status;
         var menubar:Number      = (winFeatures.menubar == null) ? 1 : winFeatures.menubar;
         var resizable:Number    = (winFeatures.resizable == null) ? 1 : winFeatures.resizable; 
         var width:Number        = (winFeatures.width == null) ? 100 : winFeatures.width;
@@ -18,8 +18,20 @@ package patternpark.net {
         var top:Number          = (winFeatures.top == null) ? 0 : winFeatures.top;
         
         var js:String = (<![CDATA[
-            function(url, winName, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top) {
-                var winNew = window.open(url,winName,"toolbar=" + toolbar + ",scrollbars=" + scrollbars + ",location=" + location + ",statusbar=" + statusbar + ",menubar=" + menubar + ",resizable=" + resizable + ",width=" + width + ",height=" + height + ",left=" + left + ",top=" + top);
+            function(url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top) {
+                var winFeatures = new Array();
+                winFeatures.push("toolbar=" + toolbar);
+                winFeatures.push("scrollbars=" + scrollbars);
+                winFeatures.push("location=" + location);
+                winFeatures.push("status=" + status);
+                winFeatures.push("menubar=" + menubar);
+                winFeatures.push("resizable=" + resizable);
+                winFeatures.push("width=" + width);
+                winFeatures.push("height=" + height);
+                winFeatures.push("left=" + left);
+                winFeatures.push("top=" + top);
+
+                var winNew = window.open(url,winName,winFeatures.join(","));
 
                 if(!winNew) {
                     return false;
@@ -31,7 +43,7 @@ package patternpark.net {
             }
         ]]>).toString();
 
-        if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top)) {
+        if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top)) {
             var urlRequest:URLRequest = new URLRequest(url);
             navigateToURL(urlRequest, "_blank");
         }
