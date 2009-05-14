@@ -3,8 +3,12 @@ package patternpark.net {
     import flash.net.navigateToURL;
     import flash.net.URLRequest;
     
-    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):void {
+    import patternpark.net.WindowContext;
+    
+    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):WindowContext {
         winName = (winName == "") ? String(Math.round(9999 * Math.random()) + new Date().getTime()) : winName;
+        var uniqueWinName:String = "navigateToWindow_" + winName;
+
         winFeatures ||= new Object();
         var toolbar:Number      = (winFeatures.toolbar == null) ? 1 : winFeatures.toolbar;
         var scrollbars:Number   = (winFeatures.scrollbars == null) ? 1 : winFeatures.scrollbars;
@@ -18,7 +22,7 @@ package patternpark.net {
         var top:Number          = (winFeatures.top == null) ? 0 : winFeatures.top;
         
         var js:String = (<![CDATA[
-            function(url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top) {
+            function(url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top, uniqueWinName) {
                 var winFeatures = new Array();
                 winFeatures.push("toolbar=" + toolbar);
                 winFeatures.push("scrollbars=" + scrollbars);
@@ -30,8 +34,8 @@ package patternpark.net {
                 winFeatures.push("height=" + height);
                 winFeatures.push("left=" + left);
                 winFeatures.push("top=" + top);
-
-                var winNew = window.open(url,winName,winFeatures.join(","));
+                    
+                var winNew = this[uniqueWinName] = window.open(url,winName,winFeatures.join(","));
 
                 if(!winNew) {
                     return false;
@@ -43,9 +47,12 @@ package patternpark.net {
             }
         ]]>).toString();
 
-        if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top)) {
+        if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top, uniqueWinName)) {
             var urlRequest:URLRequest = new URLRequest(url);
             navigateToURL(urlRequest, "_blank");
+            uniqueWinName = null;
         }
+        
+        return new WindowContext(uniqueWinName);
     }
 }
