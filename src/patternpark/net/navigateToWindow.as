@@ -3,9 +3,10 @@ package patternpark.net {
     import flash.net.navigateToURL;
     import flash.net.URLRequest;
     
+    import patternpark.net.IContextObject;
     import patternpark.net.WindowContext;
     
-    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):WindowContext {
+    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):IContextObject {
         winName = (winName == "") ? String(Math.round(9999 * Math.random()) + new Date().getTime()) : winName;
         var uniqueWinName:String = "navigateToWindow_" + winName;
 

@@ -3,7 +3,12 @@ package patternpark.net {
     import flash.net.navigateToURL;
     import flash.net.URLRequest;
     
-    public function navigateToOverlay(url:String, winFeatures:Object=null):void {
+    import patternpark.net.OverlayContext
+    
+    public function navigateToOverlay(url:String, winFeatures:Object=null):IContextObject {
+        var uniqueOverlayName:String = String(Math.round(9999 * Math.random()) + new Date().getTime());
+        uniqueOverlayName = "navigateToOverlay_overlay_" + uniqueOverlayName;
+
         if(ExternalInterface.available) {
             winFeatures ||= new Object();
             var toolbar:Number      = (winFeatures.toolbar == null) ? 1 : winFeatures.toolbar;
@@ -18,8 +23,8 @@ package patternpark.net {
             var top:Number          = (winFeatures.top == null) ? 0 : winFeatures.top;
         
             var js:String = (<![CDATA[
-                function(url, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top) {
-                    var overlay = document.createElement("div");
+                function(url, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top, uniqueOverlayName) {
+                    var overlay = this[uniqueOverlayName] = document.createElement("div");
                     overlay.style.cssText = "position: absolute; height: " + height + "px; width: " + width + "px; left:" + left + "px; top:" + top + "px";
                     document.body.appendChild(overlay);
 
@@ -52,11 +57,14 @@ package patternpark.net {
                 }
             ]]>).toString();
 
-            ExternalInterface.call(js, url, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top)
+            ExternalInterface.call(js, url, toolbar, scrollbars, location, statusbar, menubar, resizable, width, height, left, top, uniqueOverlayName)
         }
         else {
             var urlRequest:URLRequest = new URLRequest(url);
             navigateToURL(urlRequest, "_blank");
+            uniqueOverlayName = null;
         }
+        
+        return new OverlayContext(uniqueOverlayName);
     }
 }

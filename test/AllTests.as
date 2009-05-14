@@ -8,12 +8,14 @@ package {
 
 	import asunit.framework.TestSuite;
 	import patternpark.net.NavigateToWindowTest;
+	import patternpark.net.OverlayContextTest;
 	import patternpark.net.WindowContextTest;
 
 	public class AllTests extends TestSuite {
 
 		public function AllTests() {
 			addTest(new patternpark.net.NavigateToWindowTest());
+			addTest(new patternpark.net.OverlayContextTest());
 			addTest(new patternpark.net.WindowContextTest());
 		}
 	}

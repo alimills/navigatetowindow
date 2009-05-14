@@ -34,17 +34,20 @@ import flash.text.TextFieldAutoSize;
 
 import patternpark.net.navigateToOverlay;
 import patternpark.net.navigateToWindow;
-import patternpark.net.WindowContext;
+import patternpark.net.IContextObject;
 
 class NavigateToWindowExample extends Sprite {
     private var openNavWindow:TextField;
     private var closeNavWindow:TextField;
-    private var navOverlay:TextField;
+    private var openNavOverlay:TextField;
+    private var closeNavOverlay:TextField;
     private var openNavWindowText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open popup from SWF to Pattern Park</font></u></a>";
-    private var closeNavWindowText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>close popup from SWF</font></u></a>";
-    private var navOverlayText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open overlay from SWF to Pattern Park</font></u></a>";
+    private var closeNavWindowText:String = "<a href='event:'><u><font color='#0000FF'>close popup from SWF</font></u></a>";
+    private var openNavOverlayText:String = "<a href='event:http://www.patternpark.com'><u><font color='#0000FF'>open overlay from SWF to Pattern Park</font></u></a>";
+    private var closeNavOverlayText:String = "<a href='event:'><u><font color='#0000FF'>close overlay from SWF</font></u></a>";
     
-    private var popup:WindowContext;
+    private var popup:IContextObject;
+    private var overlay:IContextObject;
     
     public function NavigateToWindowExample() {
         initialize();
@@ -54,7 +57,9 @@ class NavigateToWindowExample extends Sprite {
     protected function initialize():void {
         openNavWindow = createTextField(openNavWindowText, openWindowLinkHandler);
         closeNavWindow = createTextField(closeNavWindowText, closeWindowLinkHandler);
-        navOverlay = createTextField(navOverlayText, overlayLinkHandler);
+
+        openNavOverlay = createTextField(openNavOverlayText, openOverlayLinkHandler);
+        closeNavOverlay = createTextField(closeNavOverlayText, closeOverlayLinkHandler);
     }
     
     protected function createTextField(text:String, linkHandler:Function):TextField {        
@@ -68,14 +73,17 @@ class NavigateToWindowExample extends Sprite {
     }
 
     protected function createChildren():void {
-        var openLink:DisplayObject = addChild(openNavWindow);
-        openLink.x = openLink.y = 200;
-        
-        var closeLink:DisplayObject = addChild(closeNavWindow);
-        closeLink.x = closeLink.y = 250;
+        var openWindow:DisplayObject = addChild(openNavWindow);
+        var closeWindow:DisplayObject = addChild(closeNavWindow);
 
-        var overlay:DisplayObject = addChild(navOverlay);
-        overlay.x = overlay.y = 300;
+        var openOverlay:DisplayObject = addChild(openNavOverlay);
+        var closeOverlay:DisplayObject = addChild(closeNavOverlay);
+
+        openWindow.y = closeWindow.y = 200;
+        openOverlay.y = closeOverlay.y = 230;
+
+        openWindow.x = openOverlay.x = 50;
+        closeWindow.x = closeOverlay.x = 250;
     }
 
     protected function openWindowLinkHandler(linkEvent:TextEvent):void {
@@ -99,8 +107,11 @@ class NavigateToWindowExample extends Sprite {
         popup.close();
     }
 
-    protected function overlayLinkHandler(linkEvent:TextEvent):void {
-        var point:Point = new Point(this.x, this.y);
-        navigateToOverlay(linkEvent.text, {width:400, height:300, top:point.x, left:point.y});
+    protected function openOverlayLinkHandler(linkEvent:TextEvent):void {
+        overlay = navigateToOverlay(linkEvent.text, {width:400, height:300, top:260, left:160});
+    }
+
+    protected function closeOverlayLinkHandler(linkEvent:TextEvent):void {
+        overlay.close();
     }
 }

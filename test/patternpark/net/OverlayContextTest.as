@@ -2,16 +2,16 @@ package patternpark.net {
 
     import asunit.framework.TestCase;
 
-    public class WindowContextTest extends TestCase {
-        private var instance:WindowContext;
+    public class OverlayContextTest extends TestCase {
+        private var instance:OverlayContext;
 
-        public function WindowContextTest(methodName:String=null) {
+        public function OverlayContextTest(methodName:String=null) {
             super(methodName)
         }
 
         override protected function setUp():void {
             super.setUp();
-            instance = new WindowContext();
+            instance = new OverlayContext();
         }
 
         override protected function tearDown():void {
@@ -20,7 +20,7 @@ package patternpark.net {
         }
 
         public function testInstantiated():void {
-            assertTrue("instance is WindowContext", instance is WindowContext);
+            assertTrue("instance is OverlayContext", instance is OverlayContext);
         }
     }
 }

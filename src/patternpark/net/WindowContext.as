@@ -1,7 +1,7 @@
 package patternpark.net {
     import flash.external.ExternalInterface;
     
-    public class WindowContext {
+    public class WindowContext implements IContextObject {
         protected var windowName:String;
         
         public function WindowContext(windowName:String) {
@@ -10,8 +10,8 @@ package patternpark.net {
         
         public function close():void {
             var js:String = (<![CDATA[
-                function(winName) {
-                    this[winName].close();
+                function(windowName) {
+                    this[windowName].close();
                 }
             ]]>).toString();
             
