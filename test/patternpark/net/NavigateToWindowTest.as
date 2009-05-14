@@ -100,7 +100,7 @@ class NavigateToWindowExample extends Sprite {
             left:200
         };
 
-        popup = navigateToWindow(linkEvent.text, "newWin", winFeatures);
+        popup = navigateToWindow(linkEvent.text, winFeatures);
     }
     
     protected function closeWindowLinkHandler(linkEvent:TextEvent):void {

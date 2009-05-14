@@ -6,7 +6,7 @@ package patternpark.net {
     import patternpark.net.IContextObject;
     import patternpark.net.WindowContext;
     
-    public function navigateToWindow(url:String, winName:String="", winFeatures:Object=null):IContextObject {
+    public function navigateToWindow(url:String, winFeatures:Object=null, winName:String=""):IContextObject {
         winName = (winName == "") ? String(Math.round(9999 * Math.random()) + new Date().getTime()) : winName;
         var uniqueWinName:String = "navigateToWindow_" + winName;
 
