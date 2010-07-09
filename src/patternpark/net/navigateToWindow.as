@@ -48,10 +48,19 @@ package patternpark.net {
             }
         ]]>).toString();
 
-        if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top, uniqueWinName)) {
+        var openWithNavigate:Function = function(url:String):void {
             var urlRequest:URLRequest = new URLRequest(url);
             navigateToURL(urlRequest, "_blank");
             uniqueWinName = null;
+        }
+
+        try {
+            if(!ExternalInterface.available || !ExternalInterface.call(js, url, winName, toolbar, scrollbars, location, status, menubar, resizable, width, height, left, top, uniqueWinName)) {
+                openWithNavigate(url);
+            }
+        }
+        catch(e:SecurityError) {
+            openWithNavigate(url);
         }
         
         return new WindowContext(uniqueWinName);
